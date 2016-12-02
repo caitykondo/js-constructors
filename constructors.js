@@ -15,6 +15,10 @@ function Spell(name, cost, description) {
   this.name = name;
   this.cost = cost;
   this.description = description;
+  this.getDetails = function(){
+    var details = [name, cost, description];
+    return details.join(' ');
+  };
 }
   /**
    * Returns a string of all of the spell's details.
@@ -23,10 +27,6 @@ function Spell(name, cost, description) {
    * @name getDetails
    * @return {string} details containing all of the spells information.
    */
-Spell.prototype.getDetails = function(){
-  let details = [name, cost, description];
-  return details;
-};
 
 /**
  * A spell that deals damage.
@@ -60,8 +60,8 @@ DamageSpell.prototype = Object.create(Spell.prototype, {
   constructor: Spell
 });
 
-var testSpell = new DamageSpell('magic', 10, 'thisisaspell');
-console.log(testSpell);
+var testSpell = new Spell('magic', 100, 'thisisaspell');
+console.log(testSpell.getDetails());
 
 /**
  * Now that you've created some spells, let's create
