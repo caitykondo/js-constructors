@@ -83,8 +83,8 @@ function Spellcaster(name, health, mana) {
   this.mana = mana;
   var isAlive = true;
 }
-Spellcaster.prototype.inflictDamage = function(){
-  // stub
+Spellcaster.prototype.inflictDamage = function(damage){
+  this.health -= damage;
 };
 Spellcaster.prototype.spendMana = function(){
   // stub
@@ -92,6 +92,10 @@ Spellcaster.prototype.spendMana = function(){
 Spellcaster.prototype.invoke = function(){
   // stub
 };
+
+var wiz = new Spellcaster('wiz', 100, 10);
+wiz.inflictDamage(20);
+console.log(wiz.health);
   /**
    * @method inflictDamage
    *
