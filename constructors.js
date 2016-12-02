@@ -15,10 +15,6 @@ function Spell(name, cost, description) {
   this.name = name;
   this.cost = cost;
   this.description = description;
-  this.getDetails = function(){
-    var details = [name, cost, description];
-    return details.join(' ');
-  };
 }
   /**
    * Returns a string of all of the spell's details.
@@ -27,6 +23,11 @@ function Spell(name, cost, description) {
    * @name getDetails
    * @return {string} details containing all of the spells information.
    */
+  Spell.prototype.getDetails = function(){
+    var details = [this.name, this.cost, this.description].join();
+    return details;
+    // return name + cost + description;
+  };
 
 /**
  * A spell that deals damage.
@@ -52,16 +53,13 @@ function Spell(name, cost, description) {
  * @property {number} damage
  * @property {string} description
  */
-function DamageSpell(name, cost, description){
+function DamageSpell(name, cost, damage, description){
   Spell.call(this, name, cost, description);
+  this.damage = damage;
 }
 
-DamageSpell.prototype = Object.create(Spell.prototype, {
-  constructor: Spell
-});
+DamageSpell.prototype = Object.create(Spell.prototype);
 
-var testSpell = new Spell('magic', 100, 'thisisaspell');
-console.log(testSpell.getDetails());
 
 /**
  * Now that you've created some spells, let's create
@@ -79,7 +77,21 @@ console.log(testSpell.getDetails());
  * @method  spendMana
  * @method  invoke
  */
-
+function Spellcaster(name, health, mana) {
+  this.name = name;
+  this.health = health;
+  this.mana = mana;
+  var isAlive = true;
+}
+Spellcaster.prototype.inflictDamage = function(){
+  // stub
+};
+Spellcaster.prototype.spendMana = function(){
+  // stub
+};
+Spellcaster.prototype.invoke = function(){
+  // stub
+};
   /**
    * @method inflictDamage
    *
