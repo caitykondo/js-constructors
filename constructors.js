@@ -28,8 +28,6 @@ Spell.prototype.getDetails = function(){
   return details;
 };
 
-var testSpell = new Spell('magic', 10, 'thisisaspell');
-console.log(testSpell);
 /**
  * A spell that deals damage.
  * We want to keep this code DRY (Don't Repeat Yourself).
@@ -54,6 +52,16 @@ console.log(testSpell);
  * @property {number} damage
  * @property {string} description
  */
+function DamageSpell(name, cost, description){
+  Spell.call(this, name, cost, description);
+}
+
+DamageSpell.prototype = Object.create(Spell.prototype, {
+  constructor: Spell
+});
+
+var testSpell = new DamageSpell('magic', 10, 'thisisaspell');
+console.log(testSpell);
 
 /**
  * Now that you've created some spells, let's create
