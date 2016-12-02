@@ -1,3 +1,4 @@
+  /*jshint esversion: 6 */
 /**
  * Creates a generic spell that can be cast.
  *
@@ -22,7 +23,13 @@ function Spell(name, cost, description) {
    * @name getDetails
    * @return {string} details containing all of the spells information.
    */
+Spell.prototype.getDetails = function(){
+  let details = [name, cost, description];
+  return details;
+};
 
+var testSpell = new Spell('magic', 10, 'thisisaspell');
+console.log(testSpell);
 /**
  * A spell that deals damage.
  * We want to keep this code DRY (Don't Repeat Yourself).
