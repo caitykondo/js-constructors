@@ -92,19 +92,58 @@ Spellcaster.prototype.inflictDamage = function(damage){
   }
 
 };
-Spellcaster.prototype.spendMana = function(){
-  // stub
+Spellcaster.prototype.spendMana = function(cost){
+  if(this.mana > 0 && cost <= this.mana){
+    this.mana -= cost;
+    return true;
+  }else{
+    return false;
+  }
 };
-Spellcaster.prototype.invoke = function(){
-  // stub
+Spellcaster.prototype.invoke = function(spell, target){
+  if(spell instanceof(DamageSpell) === true){
+    if(target instanceof(Spellcaster) === true){
+      if (this.mana >= spell.cost){
+        target.inflictDamage(spell.damage);
+        this.spendMana(spell.cost);
+        return true;
+      }else {
+        return false;
+      }
+    }else {
+      return false;
+    }
+  }else if (spell instanceof(Spell) === true){
+    if (this.mana >= spell.cost){
+      this.spendMana(spell.cost);
+      return true;
+    }else{
+      return false;
+    }
+  }else{
+    return false;
+  }
 };
 
-var wiz = new Spellcaster('wiz', 0, 10);
-wiz.inflictDamage(10);
+var loren = new Spellcaster('Loren', 100, 125);
+var loren2 = new Spellcaster('Loren', 100, 125);
+    gust = new DamageSpell('Gust', 200, 20, 'Creates a gentle breeze.');
+    // loren.inflictDamage(20);
+    // loren.spendMana(20);
+    loren.invoke(gust, loren2);
+    // loren2.inflictDamage(20);
+    // totalMana = loren.mana;
+    console.log(loren2.health);
+// var wiz = new Spellcaster('wiz', 40, 100);
+// var genie = new Spellcaster('genie', 40, 100);
+// var spell = new DamageSpell('spell', 10, 20,'a normal spell');
+// // wiz.spendMana(60);
+// genie.invoke(spell, wiz);
+// genie.invoke(spell, wiz);
 
-console.log(wiz.health);
-console.log(wiz.isAlive);
 
+// console.log(wiz.health);
+// console.log(genie.mana);
   /**
    * @method inflictDamage
    *
